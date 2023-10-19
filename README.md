@@ -1,7 +1,7 @@
 <h1 align="center">Groupie Tracker</h1>
 
 <p align="center">
-    <img src="/home/amali/groupie-tracker-geolocalization/views/images/Picture1.png" alt="G.T.logo" />
+    <img src="./views/images/Picture1.png" alt="G.T.logo" />
 </p>
 
 <h2 align="center">About The Project</h2>

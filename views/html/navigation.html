@@ -1,0 +1,156 @@
+{{ define "navigation" }}
+<form method="POST" action="/">
+<nav class="navigation">
+
+    <!--loge--------------->
+    <a href="/" class="logo">
+        <img src="/images/Picture1.png" alt="Groupie Trackers">
+    </a>
+    
+
+    <!-- Search-box-------->
+    <div class="search-box">
+        <input type="text" name="query" placeholder="Search.." class="search-input" list="suggestions" />
+        <datalist id="suggestions">
+            {{ range .Artists }}
+                <option value="{{.Name}}">{{.Name}} - artist/band</option>
+                {{ range .Members }}<option value="{{.}}">{{.}} - member</option>{{ end }}
+                <option value="{{.CreationDate}}">{{ .CreationDate}} - creation date</option>
+                <option value="{{.FirstAlbum}}">{{ .FirstAlbum}} - first album date</option>
+                
+                {{ range .Conc }}<option value="{{ .Location }}">{{ .Location }}- Concert location </option>{{ end }}	
+            {{end}}
+            <!-- Suggestions will be dynamically added here -->
+          </datalist>
+        <!--Search-btn -->
+        <button type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
+    <!--filter-btn--------->
+    <input type="checkbox" class="drawer-toggle" id="my-drawer">
+    <label for="my-drawer" class="filter-icon">
+        <span class="nav-icon"></span>
+    </label>
+
+    <!---filters----------->
+    <div class="drawer-side">
+        <label for="my-drawer" class="drawer-overlay"></label>
+        <ul class="menu p-4 w-80 h-full bg-base-200 text-base-content" >
+          <!-- Sidebar content here -->
+          <!-- <h1 style="font-weight: 900;">Filters</h1> -->
+            <!-- Creation Date Filter -->
+          <div class="collapse collapse-arrow bg-base-200">
+              <input type="radio" name="my-accordion-2" checked="checked" /> 
+              <div class="collapse-title text-xl font-medium">
+                  <p>Creation Date</p>
+                <Translate text="Click to open this one and close others" />
+              </div>
+                <div class="collapse-content"> 
+                  <div class="form-control">
+                      <div class="input-group">
+                      <input id="creationfrom" name="creationfrom" type="number" class="compact" placeholder="1958" min="1958" max="2015" />
+                      <input id="creationto" name="creationto" type="number" class="compact" placeholder="2015" min="1958" max="2015" />
+                      </div>
+                  </div>
+                </div>
+          </div>
+            <!-- First Album Filter -->
+            <div class="collapse collapse-arrow bg-base-200">
+              <input type="radio" name="my-accordion-2" /> 
+              <div class="collapse-title text-xl font-medium">
+                  <p>First Album</p>
+                <Translate text="Click to open this one and close others" />
+              </div>
+              <div class="collapse-content"> 
+                  <div class="form-control">
+                      <div class="input-group">
+                          <input id="Albumfrom" name="Albumfrom" type="number" class="compact" placeholder="1963" min="1963" max="2018"/>
+                          <input id="Albumto" name="Albumto" type="number" class="compact" placeholder="2018" min="1963" max="2018"/>
+                      </div>
+                  </div>
+            </div>
+            </div>
+            <!-- Concerts location filter -->
+            <div class="collapse collapse-arrow bg-base-200">
+              <input type="radio" name="my-accordion-2" /> 
+              <div class="collapse-title text-xl font-medium">
+                  <p>Concerts</p>
+                <Translate text="Click to open this one and close others" />
+              </div>
+              <div class="collapse-content">
+                  <p>Select one</p>
+                    <div class="form-control">
+
+                      <div class="input-group">
+                          <select id="location" name="location" class="compact" placeholder="City" style="width: 240px;" >
+                              <option value="">By Country /City</option>
+                              {{range .Lists}}
+                            <optgroup label="{{ .Country }}" id="{{ .Country }}">
+                              <option value="{{ .Country }}">all cities</option>
+                                  {{range .CitysList}}
+                              <option value="{{ . }}">{{ . }}</option>
+                                  {{end}}
+                            </optgroup>
+                              {{end}}
+                          </select>
+                      </div>
+
+              </div>
+          </div>
+            </div>
+            <!-- Number of members filter -->
+              <div class="collapse collapse-arrow bg-base-200">
+              <input type="radio" name="my-accordion-2" /> 
+              <div class="collapse-title text-xl font-medium">
+                  <p>Number of Members</p>
+                  <Translate text="Click to open this one and close others" />
+              </div>
+
+              <div class="collapse-content"> 
+                  <div class="form-control">
+                      <div class="input-group">
+                          <div class="input-group">
+
+                              <div class="input-group" style="display: flex; justify-content: center; margin-top: 10px;">
+                              <div class="checkbox-group" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center;">
+                                  <label for="NumMembers1" class="numbers">1</label>
+                                  <input id="NumMembers1" name="NumMembers" type="checkbox" value="1" style=" width: 35px; height: 35px;" />
+                                  
+                                  <label for="NumMembers2" class="numbers">2</label>
+                                  <input id="NumMembers2" name="NumMembers" type="checkbox" value="2" style=" width: 35px; height: 35px;" />
+                                  
+                                  <label for="NumMembers3" class="numbers">3</label>
+                                  <input id="NumMembers3" name="NumMembers" type="checkbox" value="3" style=" width: 35px; height: 35px;" />
+                                  
+                                  <label for="NumMembers4" class="numbers">4</label>
+                                  <input id="NumMembers4" name="NumMembers" type="checkbox" value="4" style=" width: 35px; height: 35px;" />
+                                  
+                                  <label for="NumMembers5" class="numbers">5</label>
+                                  <input id="NumMembers5" name="NumMembers" type="checkbox" value="5" style=" width: 35px; height: 35px;" />
+                                  
+                                  <label for="NumMembers6" class="numbers">6</label>
+                                  <input id="NumMembers6" name="NumMembers" type="checkbox" value="6" style=" width: 35px; height: 35px;" />
+                                  
+                                  <label for="NumMembers7" class="numbers">7</label>
+                                  <input id="NumMembers7" name="NumMembers" type="checkbox" value="7" style=" width: 35px; height: 35px;" />
+                                  
+                                  <label for="NumMembers8" class="numbers">8</label>
+                                  <input id="NumMembers8" name="NumMembers" type="checkbox" value="8" style=" width: 35px; height: 35px;" />
+                                  
+                              </div>
+                          </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              </div>
+              <button class="btn btn-outline">Submit</button>
+
+        </ul>
+      </div>
+</nav>
+</form>
+{{ end }}

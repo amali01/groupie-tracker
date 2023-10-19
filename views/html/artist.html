@@ -1,0 +1,149 @@
+{{ define "artist-banner" }}
+	<!-- ==Artist-Banner========== -->
+	<main class="artist-banner">
+		<!-- img -->
+		<div class="m-banner-img">
+			<img src="{{ .Artist.Picture }}" alt="{{ .Artist.Name }}">
+		</div>
+
+		<!-- content========== -->
+		<div class="banner-container">
+			<div class="left-container">
+				<!-- name-container **********-->
+				<div class="name-container">
+					<!-- name -->
+					<div class="artist-name">
+						<h1>{{ .Artist.Name }}</h1>
+					</div>
+					<!-- about artist -->
+					<div class="more-about-artist">
+						<span class="creation-date">Creation Date: {{ .Artist.CreationDate }} </span>
+						<span>First Album: {{ .Artist.FirstAlbum }} </span>
+					</div>
+				</div>
+				
+				<!-- bottom =================== -->
+				<div class="bottom-text">
+					<!-- members and concerts-->
+					<div class="members">
+						<strong>Members:</strong>
+						<p>
+							{{ range .Artist.Members }}
+							{{ . }},
+							{{ end }}
+						</p>
+						<!-- Concerts -->
+						<strong>Concerts:</strong>
+						<br>
+						{{ range .Artist.Conc }}
+						
+						<p>
+						  <button onclick="toggleList('{{ .Country }}-{{ .City }}')">{{ .Country }}-{{ .City }}</button>
+						  <ol id="{{ .Country }}-{{ .City }}-dateList" style="display: none;">
+							{{ range .Dates }}
+							  <li>{{ . }}</li>
+							{{ end }}
+						  </ol>
+						</p>
+						{{ end }}
+						<br>
+					</div>
+				</div>
+				<br>
+				<div>
+					<div>
+						<div class="location-btn-contaier">
+							<div class="location-btn">
+								<a href="#" id="show-map-btn">
+									<i class="fas fa-map"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<div style="height: 70vh; display: none; align-items: center; justify-content: center; color: black;" id="map-container">
+					<div id="googleMap" style="width: 75%; height: 75%;"></div>
+				</div>
+			</div>
+		</div>
+
+
+	</main>
+	<script>
+		function toggleList(id) {
+		  var dateList = document.getElementById(id + "-dateList");
+		  dateList.style.display = (dateList.style.display === "none") ? "block" : "none";
+		}
+		
+	</script>
+
+	<script>
+		// Event listener for the button click
+		document.getElementById("show-map-btn").addEventListener("click", function () {
+			var mapContainer = document.getElementById("map-container");
+			if (mapContainer.style.display === "none") {
+				mapContainer.style.display = "flex";
+			} else {
+				mapContainer.style.display = "none";
+			}
+		});
+	</script>
+
+
+	
+	
+	<script>
+		function myMap() {
+		  var mainMap = new google.maps.Map(document.getElementById("googleMap"), {
+			center: new google.maps.LatLng(26, -15),
+			zoom: 2.5,
+		  });
+	  
+		  var infowindow = new google.maps.InfoWindow();
+	  
+		  {{ range .Artist.Conc }}
+		  var geocoder = new google.maps.Geocoder();
+		  geocoder.geocode({ address: "{{ .Location }}" }, function (results, status) {
+			if (status === 'OK') {
+			  var myLatLng = results[0].geometry.location;
+	  
+			  var marker = new google.maps.Marker({
+				position: myLatLng,
+				map: mainMap,
+				title: '{{.Location}}',
+			  });
+	  
+			  // Add a click event listener to the marker
+			  marker.addListener('click', function() {
+				// Set the content of the InfoWindow with your information
+			 // Check if there are multiple dates
+				{{ if gt (len .Dates) 1 }}
+				var content = '<ul>';
+				{{ range .Dates }}
+					content += '<li>{{ . }}</li>';
+				{{ end }}
+				content += '</ul>';
+				{{ else }}
+				// If there's only one date, just use it as is
+				var content = '{{ index .Dates 0 }}';
+				{{ end }}
+
+				infowindow.setContent(content);
+				// Open the InfoWindow
+				infowindow.open(mainMap, marker);
+			  });
+			}
+		  });
+		  {{ end }}
+		}
+	  </script>
+	  
+	  <script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_79pmmv_C3K9YAYF5loywRcHiDRF7kRo&callback=myMap"></script>
+	  </html>
+	
+
+
+
+{{ end }}

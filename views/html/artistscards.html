@@ -1,0 +1,53 @@
+{{ define "artistCards"}}
+<section class="main-section">
+	<!-- heading -->
+	<div class="heading">
+		<h1>FIND YOUR FAVORITE BANDS EVERYWHERE</h1>
+	</div>
+
+	<!-- container -->
+	<div class="post-container">
+		<!-- all artists -->
+		{{ range .Artists }}
+    
+		{{ if not .DontDisplay  }}
+		<!-- artist card -->
+		<div class="artist-card">
+			<!-- overlayer -->
+			<a href="/artist/{{ .Name }}" class="artist-card-overlay">
+				<i class="fas fa-music"></i>
+			</a>
+	
+			<!-- img -->
+			<div class="artist-card-image">
+				<img src="{{ .Picture }}" alt="{{ .Name }}">
+			</div>
+			<!-- text -->
+			<div class="artist-card-text">
+				<!-- creation-date -->
+				<span class="creation-date">{{ .CreationDate }}</span>
+				
+				<!-- bottom-text -->
+				<div class="bottom-text">
+					<!-- name -->
+					<div class="artist-name">
+						<!-- <span>1st Album: {{ .FirstAlbum }}</span> -->
+						<strong>{{ .Name }}</strong>
+					</div>
+					<!-- Members -->
+					<div class="members">
+						<p>1st Album: {{ .FirstAlbum }}</p>
+						<!-- <p>
+							{{ range .Members }}
+							{{ . }},
+							{{ end }}
+						</p> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		{{ end }}
+		{{ end }}
+	</div>
+</section>
+{{ end }}

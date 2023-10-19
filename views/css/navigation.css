@@ -1,0 +1,134 @@
+.navigation{
+    position: fixed;
+    top:0%;
+    right: 0%;
+    left: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* max-width: 1400px; */
+    /* height: 100%; */
+    margin: auto;
+    width: 100%;
+    z-index: 100;
+    /* background-color: #181818; */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 70%);
+}
+
+
+.navigation .filter-icon{
+    cursor: pointer;
+    float: right;
+    padding: 20px 10px;
+    z-index: 103;
+}
+
+.navigation .filter-icon .nav-icon{
+    display: block;
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
+    background-image: url('./pictures/filter-icon.png');
+    background-size: cover;
+}
+
+.compact {
+    background-color: #262626 !important;
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    flex-shrink: 1;
+    height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+    line-height: 2;
+    line-height: 1.5rem;
+    border-width: 1px;
+    border-color: hsl(var(--bc) / var(--tw-border-opacity));
+    --tw-border-opacity: 0;
+    --tw-bg-opacity: 1;
+    background-color: hsl(var(--b1) / var(--tw-bg-opacity));
+    border-radius: var(--rounded-btn, 0.5rem);
+    border-color: aqua;
+    color: azure;
+}
+
+.numbers {
+    font-size: 25px;
+    width: 30%;
+    display: grid;
+    border-width: 1px;
+    border-radius: var(--rounded-btn, 0.5rem);
+    border-color: aqua;
+    align-content: center;
+    justify-content: center;
+    color: #9ca3af;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin: 0 auto 0 40px;
+    width: 150px;
+    height: 150px; 
+}
+
+/* Search Box */
+
+.search-box{
+    background-color: #ececec11;
+    padding: 3px 20px;
+    border-radius: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
+    /* width: 500; */
+}
+
+.search-box input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+}
+
+.search-box input::placeholder{
+    color: #ffffff5e;
+}
+
+.search-box button{
+    color: rgb(1, 180, 180);
+}
+
+/* responsive */
+@media (max-width:824px){
+    .navigation{
+        width: 90%
+    }
+}
+
+@media (max-width: 510px) {
+    .navigation {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: flex-start;
+    }
+    
+    .logo {
+      display: none;
+    }
+    
+    .search-box,
+    .filter-icon {
+      grid-row: 2;
+      margin: auto;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+}

@@ -98,7 +98,7 @@ func FilterAlbum(w http.ResponseWriter, r *http.Request, data apiprocess.Data) {
 		HTTPErrorHandler(w, r, http.StatusBadRequest)
 		return
 	}
-	
+
 	if err2 != nil {
 		HTTPErrorHandler(w, r, http.StatusBadRequest)
 		return
@@ -175,7 +175,8 @@ func FilterConcerts(w http.ResponseWriter, r *http.Request, data apiprocess.Data
 	for i := range data.Artists {
 		Locations := []string{}
 		for _, concert := range data.Artists[i].Conc {
-			Locations = append(Locations, concert.Location)
+			location := strings.Replace(strings.ToLower(concert.Location), "_", " ", -1)
+			Locations = append(Locations, location)
 		}
 		SearchLocation := strings.Join(Locations, " ")
 

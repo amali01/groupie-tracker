@@ -18,7 +18,7 @@
                 <option value="{{.CreationDate}}">{{ .CreationDate}} - creation date</option>
                 <option value="{{.FirstAlbum}}">{{ .FirstAlbum}} - first album date</option>
                 
-                {{ range .Conc }}<option value="{{ .Location }}">{{ .Location }}- Concert location </option>{{ end }}	
+                {{ range .Conc }}<option value="{{ .City }}">{{ .Country }}-{{ .City }}- Concert location </option>{{ end }}	
             {{end}}
             <!-- Suggestions will be dynamically added here -->
           </datalist>

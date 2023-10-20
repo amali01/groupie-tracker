@@ -145,7 +145,8 @@ func Search(w http.ResponseWriter, r *http.Request, data apiprocess.Data) {
 		Locations := []string{}
 
 		for _, concert := range data.Artists[i].Conc {
-			Locations = append(Locations, concert.Location)
+			location := strings.Replace(strings.ToLower(concert.Location), "_", " ", -1)
+			Locations = append(Locations, location)
 		}
 		SearchLocation := strings.Join(Locations, " ")
 

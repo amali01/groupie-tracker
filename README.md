@@ -19,7 +19,7 @@ git clonehttps://github.com/amali01/groupie-tracker.git
 Go to the project directory
 
 ```bash
-  cd groupie-tracker-geolocalization
+  cd groupie-tracker
 ```
 
 ### Directory Structure

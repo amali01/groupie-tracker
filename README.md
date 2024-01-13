@@ -13,7 +13,7 @@ It serves as a convenient tool for music enthusiasts, allowing them to keep trac
 Clone the project
 
 ```bash
-git clone https://learn.reboot01.com/git/amali/groupie-tracker-geolocalization.git
+git clonehttps://github.com/amali01/groupie-tracker.git
 ```
 
 Go to the project directory
@@ -74,5 +74,5 @@ go run main.go
 
 ## Authors
 
-- emahfood 
-- amali 
+- emahfoodh
+- amali01
